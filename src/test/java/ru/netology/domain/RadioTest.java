@@ -15,7 +15,49 @@ class RadioTest {
         assertEquals(0, rad.minStation);
         assertEquals(0, rad.minVolume);
         assertEquals(10, rad.maxVolume);
+        assertEquals(1, rad.volumeUp);
+        assertEquals(0, rad.volumeDown);
+        assertEquals(0, rad.stationUp);
+        assertEquals(0, rad.stationDown);
     }
+
+    @Test
+    public void setStationUp () {
+        rad.setCurrentStation(4);
+        rad.setStationUp(5);
+        int expected = 5;
+        int actual = rad.setStationUp(5);
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void setStationDown () {
+        rad.setCurrentStation(5);
+        rad.setStationDown(4);
+        int expected = 4;
+        int actual = rad.setStationDown(4);
+        assertEquals(expected,actual);
+    }
+
+
+    @Test
+    public void setVolumeDown () {
+        rad.setCurrentVolume(1);
+        rad.setVolumeDown(0);
+        int expected = 0;
+        int actual = rad.setVolumeDown(0);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setVolumeUp () {
+        rad.setCurrentVolume(0);
+        rad.setVolumeUp(1);
+        int expected = 1;
+        int actual = rad.setVolumeUp(1);
+        assertEquals(expected, actual);
+    }
+
 
     @Test
     public void setStation() {
@@ -130,4 +172,4 @@ class RadioTest {
             int actual = rad.getMinVolume();
             assertEquals(expected, actual);
         }
-}
+   }

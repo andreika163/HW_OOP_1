@@ -9,8 +9,32 @@ public class Radio {
     public int minStation = 0;
     public int maxVolume = 10;
     public int minVolume = 0;
+    public int volumeUp = 1;
+    public int volumeDown = 0;
+    public int stationUp;
+    public int stationDown;
 
-    public String getSelectStation(){
+    public int setStationUp(int stationUp){
+        this.stationUp = stationUp;
+        return stationUp;
+    }
+
+    public int setStationDown (int stationDown){
+        this.stationDown = stationDown;
+        return stationDown;
+    }
+
+    public int setVolumeUp(int volumeUp) {
+        this.volumeUp = volumeUp;
+        return volumeUp;
+    }
+
+    public int setVolumeDown(int volumeDown) {
+        this.volumeDown = volumeDown;
+        return volumeDown;
+    }
+
+    public String getSelectStation() {
         return selectStation;
     }
 
