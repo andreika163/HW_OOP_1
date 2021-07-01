@@ -4,117 +4,63 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RadioTest {
-    Radio rad = new Radio();
-
+class RadioTest {
     @Test
-    public void setStation() {
-    String expected = "3";
-    assertNull(rad.getSelectStation());
-    rad.setSelectStation("3");
-    assertEquals(expected, rad.getSelectStation());
-    }
+    void stationWork() {
+        Radio radio = new Radio();
 
-    @Test
-    public void minStationAfterMaxStation() {
-    rad.setMaxStation(9);
-    rad.setMinStation(0);
-    rad.setCurrentStation(0);
-    rad.setCurrentStation(10);
-    int expected = 0;
-    int actual = rad.getCurrentStation();
-    assertEquals(expected, actual);
+        radio.setCurrentStation(10);
+        assertEquals(0, radio.getCurrentStation());
+
+        radio.setCurrentStation(-1);
+        assertEquals(0, radio.getCurrentStation());
+
+        radio.setCurrentStation(4);
+        radio.setCurrentStation(10);
+        assertEquals(4, radio.getCurrentStation());
+
+        radio.setCurrentStation(-1);
+        assertEquals(4, radio.getCurrentStation());
     }
 
     @Test
-    public void MaxStationAfterMinStation() {
-    rad.setMaxStation(9);
-    rad.setMinStation(0);
-    rad.setCurrentStation(9);
-    rad.setCurrentStation(10);
-    int expected = 9;
-    int actual = rad.getCurrentStation();
-    assertEquals(expected, actual);
+    void buttonWork() {
+        Radio radio = new Radio();
+
+        assertEquals(0, radio.getCurrentStation());
+
+        radio.pushPrevButton();
+        assertEquals(9, radio.getCurrentStation());
+        radio.pushPrevButton();
+        assertEquals(8, radio.getCurrentStation());
+
+        radio.pushNextButton();
+        assertEquals(9, radio.getCurrentStation());
+        radio.pushNextButton();
+        assertEquals(0, radio.getCurrentStation());
+        radio.pushNextButton();
+        assertEquals(1, radio.getCurrentStation());
     }
 
     @Test
-    public void tapStationUp() {
-    for (int st = 0; st <= 9; st++){
-    System.out.println(st);
-    }
-    }
+    void volumeWork() {
+        Radio radio = new Radio();
 
-    @Test
-    public void tapStationDown() {
-    for (int st = 9; st >= 0; st--){
-    System.out.println(st);
-    }
-    }
+        assertEquals(0, radio.getVolume());
 
-    @Test
-    public void setCurrentStationMoreMax(){
-    rad.setMaxStation(9);
-    rad.setMinStation(0);
-    rad.setCurrentStation(0);
-    rad.setCurrentStation(10);
-    int expected = 0;
-    int actual = rad.getCurrentStation();
-    assertEquals(expected, actual);
-    }
+        radio.volumeDown();
+        assertEquals(0, radio.getVolume());
 
-    @Test
-    public void setCurrentStationMoreMin(){
-    rad.setMaxStation(9);
-    rad.setMinStation(0);
-    rad.setCurrentStation(0);
-    rad.setCurrentStation(-1);
-    int expected = 0;
-    int actual = rad.getCurrentStation();
-    assertEquals(expected, actual);
-    }
+        radio.volumeUp();
+        assertEquals(1, radio.getVolume());
+        radio.volumeDown();
+        assertEquals(0, radio.getVolume());
 
-    @Test
-    public void setVolumeMoreMax() {
-    rad.setMaxVolume(10);
-    rad.setMinVolume(0);
-    rad.setCurrentVolume(10);
-    rad.setCurrentVolume(11);
-    int expected = 10;
-    int actual = rad.getCurrentVolume();
-    assertEquals(expected, actual);
+        int i = 0;
+        while (i < 10) {
+            radio.volumeUp();
+            i++;
+        }
+        assertEquals(9, radio.getVolume());
     }
-
-    @Test
-    public void setVolumeMoreMin() {
-    rad.setMaxVolume(10);
-    rad.setMinVolume(0);
-    rad.setCurrentVolume(0);
-    rad.setCurrentVolume(-1);
-    int expected = 0;
-    int actual = rad.getCurrentVolume();
-    assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setMaxVolume() {
-    rad.setCurrentVolume(5);
-    rad.setMaxVolume(10);
-    int expected = 10;
-    int actual = rad.getMaxVolume();
-    assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setVolumeDown() {
-    for (int volume = 10; volume >=0; volume--) {
-    System.out.println(volume);
-    }
-    }
-
-    @Test
-    public void setVolumeUp() {
-    for (int volume = 0; volume <= 10; volume ++) {
-    System.out.println(volume);
-    }
-    }
-   }
+}
