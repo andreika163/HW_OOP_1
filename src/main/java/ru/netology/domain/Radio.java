@@ -8,7 +8,7 @@ public class Radio {
         if (this.currentStation == 9) {
             this.currentStation = 0;
         } else {
-            this.currentStation++;
+            this.currentStation = currentStation + 1;
         }
     }
 
@@ -32,7 +32,7 @@ public class Radio {
     }
 
     private boolean volumeMax() {
-        return this.volume == 9;
+        return this.volume == 10;
     }
 
     private boolean volumeMin() {
